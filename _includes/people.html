@@ -1,0 +1,13 @@
+{% assign by_name = site.people | sort: "name" %}
+{% assign sorted = by_name | sort: "rank" %}
+
+<div class="grid">
+  {% for p in sorted %}
+    <article class="card person">
+      <h3 class="h5">{{ p.name }}</h3>
+      <p class="muted">{{ p.role }}</p>
+      {% if p.bio %}<p>{{ p.bio }}</p>{% endif %}
+    </article>
+  {% endfor %}
+</div>
+</section>

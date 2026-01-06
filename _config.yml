@@ -1,0 +1,22 @@
+title: New Digital Drug Discovery
+description: We automate curiosity so you don’t have to.
+baseurl: "/nd3"
+url: "https://aptheory.github.io"
+markdown: kramdown
+collections:
+  people:
+    output: true
+defaults:
+  - scope: { path: "", type: "posts" }
+    values:
+      layout: post
+  - scope: { path: "", type: "people" }
+    values:
+      layout: person
+  - scope:
+      path: ""
+      type: "people"
+    values:
+      rank: 99
+permalink: /:categories/:year/:month/:day/:title/
+exclude: [README.md, Gemfile, Gemfile.lock, node_modules, vendor]

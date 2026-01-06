@@ -1,0 +1,102 @@
+<!-- _layouts/default.html -->
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ site.data.lab.name }} — {{ site.data.lab.tagline }}</title>
+  <meta name="description" content="{{ site.description }}" />
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.data.lab.name }}</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#what">What We Do</a>
+        <a href="#publications">Publications</a>
+        <a href="#people">People</a>
+        <a href="#press">News</a>
+        <a href="#join">Join</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle color theme">☾</button>
+    </div>
+  </header>
+
+  <main id="content">
+    {% include hero.html %}
+    <section id="about" class="section container">
+      {% include section-heading.html icon="★" title="Philosophy" %}
+      <p>At ND3, we endorse a simple principle: people should live their lives and let AI do the work. We design autonomous, auditable pipelines for digital discovery—and we grade them with inappropriate seriousness.</p>
+    </section>
+
+    <section id="what" class="section container">
+      {% include section-heading.html icon="⧉" title="What We Do" %}
+      <ul class="bullets">
+        <li>Generative molecule design and docking-at-scale.</li>
+        <li>Active-learning loops and post‑hoc human grading.</li>
+        <li>Autonomous pipelines, reproducible by design. Bench space: not applicable.</li>
+      </ul>
+    </section>
+
+    <section id="publications" class="section container">
+      {% include section-heading.html icon="◳" title="Publications" %}
+      {% include publications.html %}
+    </section>
+
+    <section id="people" class="section container">
+      {% include section-heading.html icon="☍" title="People" %}
+      {% include people.html %}
+    </section>
+
+    <section id="press" class="section container">
+      {% include section-heading.html icon="✦" title="News & Press" %}
+      {% include press.html %}
+    </section>
+
+    <section id="join" class="section container">
+      {% include section-heading.html icon="→" title="Join ND3" %}
+      <p>We recruit humans for oversight, snacks, and ethics. Typical roles: Evaluator (human), Prompt Cartographer, Pipeline Janitor.</p>
+      <p><a class="btn" href="mailto:{{ site.data.lab.email }}">Email {{ site.data.lab.email }}</a></p>
+    </section>
+
+    <section id="contact" class="section container">
+      {% include section-heading.html icon="✉" title="Contact & Disclaimer" %}
+      <p>Email: <a href="mailto:{{ site.data.lab.email }}">{{ site.data.lab.email }}</a></p>
+      <p class="muted">ND3 is a fictional research group. Any resemblance to real labs is the model’s fault.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© {{ site.time | date: "%Y" }} {{ site.data.lab.short }} • Minimal, dry, and usable.</small>
+    </div>
+  </footer>
+
+  <!-- Optional tiny JS: persist theme; honors prefers-color-scheme -->
+  <script>
+  (function() {
+    const key='nd3-theme';
+    const root=document.documentElement;
+    const btn=document.getElementById('themeBtn');
+    const saved=localStorage.getItem(key);
+    if(saved){ root.setAttribute('data-theme', saved); }
+    btn && btn.addEventListener('click', function(){
+      const cur=root.getAttribute('data-theme');
+      const next=(cur==='dark')?'light':'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem(key, next);
+    });
+    // Default to system on first load
+    if(!saved){
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    }
+  })();
+  </script>
+</body>
+</html>

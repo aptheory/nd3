@@ -1,0 +1,22 @@
+<!-- _includes/publications.html -->
+{% assign pubs = site.posts | where_exp: "post", "post.categories contains 'publication'" %}
+{% if pubs.size == 0 %}
+  <p class="muted">No publications yet. The models are busy.</p>
+{% else %}
+  <div class="stack">
+  {% for post in pubs %}
+    <a class="card link" href="{{ post.url | relative_url }}">
+      <h3 class="h5">{{ post.title }}</h3>
+      <p class="meta">
+        {% if post.authors %}{{ post.authors | join: ", " }}{% endif %}
+        {% if post.venue %} — {{ post.venue }}{% endif %}
+      </p>
+      {% if post.abstract %}<p>{{ post.abstract }}</p>{% endif %}
+      <p class="meta">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d, %Y" }}</time>
+        {% if post.doi %} • DOI{% endif %}
+      </p>
+    </a>
+  {% endfor %}
+  </div>
+{% endif %}
